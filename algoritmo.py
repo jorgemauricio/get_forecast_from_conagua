@@ -31,7 +31,7 @@ def main():
 
     """
     # leer el archivo a insertar
-    df = pd.read_json("data/{}/DailyForecast_MX".format(today))
+    df = pd.read_json("/home/jorge/Documents/Research/get_forecast_from_conagua/data/{}/DailyForecast_MX".format(today))
 
     """
     # # # # # # # # # # # # # # # # # # #
