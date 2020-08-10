@@ -80,7 +80,7 @@ def main():
         # ejecutar insert
         print(query)
         cursor.execute(query, (CC, DESCIEL, DH, DIRVIENC, DIRVIENG, DLOC, IDES,
-                               IDMUN, LAT, LON, DIA, NES, NMUN, PREC, PROBPREC,
+                               IDMUN, LAT, LON, NDIA, NES, NMUN, PREC, PROBPREC,
                                RAF, TMAX, TMIN, VELVIEN))
         cursor.commit()
 
