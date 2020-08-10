@@ -49,7 +49,7 @@ def main():
         """
 
         CC       = row["cc"]
-        DESCIEL  = row["desciel""]
+        DESCIEL  = row["desciel"]
         DH       = row["dh"]
         DIRVIENC = row["dirvienc"]
         DIRVIENG = row["dirvieng"]
