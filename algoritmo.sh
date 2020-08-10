@@ -4,10 +4,10 @@
 today="$(date '+%Y-%m-%d')"
 
 # create directory
-mkdir /home/jorge/Documents/Research/get_data_conagua/data/$today
+mkdir /home/jorge/Documents/Research/get_forecast_from_conagua/data/$today
 
 # change directory
-cd /home/jorge/Documents/Research/get_data_conagua/data/$today
+cd /home/jorge/Documents/Research/get_forecast_from_conagua/data/$today
 
 # download daily values
 wget ftp://ftp.conagua.gob.mx/pronosticoporciudades/DailyForecast_MX.gz
