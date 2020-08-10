@@ -46,8 +46,8 @@ def main():
     for index, row in df.iterrows():
         "cc,desciel,dh,dirvienc,dirvieng,dloc,ides,idmun,lat,lon,ndia,nes,nmun,prec,probprec,raf,tmax,tmin,velvien"
 
-        CC       = row["lats"]
-        DESCIEL  = row["lons"]
+        CC       = row["cc"]
+        DESCIEL  = row["desciel""]
         DH       = row["graupel"]
         DIRVIENC = row["hail"]
         DIRVIENG = row["rain"]
