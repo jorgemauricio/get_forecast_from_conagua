@@ -44,7 +44,9 @@ def main():
     cursor =  conn.cursor()
 
     for index, row in df.iterrows():
-        """ cc,desciel,dh,dirvienc,dirvieng,dloc,ides,idmun,lat,lon,ndia,nes,
+        """
+        Columns:
+        cc,desciel,dh,dirvienc,dirvieng,dloc,ides,idmun,lat,lon,ndia,nes,
             nmun,prec,probprec,raf,tmax,tmin,velvien
         """
 
@@ -80,8 +82,8 @@ def main():
         # ejecutar insert
         print(query)
         cursor.execute(query, (CC, DESCIEL, DH, DIRVIENC, DIRVIENG, DLOC, IDES,
-                               IDMUN, LAT, LON, NDIA, NES, NMUN, PREC, PROBPREC,
-                               RAF, TMAX, TMIN, VELVIEN))
+                              IDMUN, LAT, LON, NDIA, NES, NMUN, PREC, PROBPREC,
+                              RAF, TMAX, TMIN, VELVIEN))
         cursor.commit()
 
     conn.close()
