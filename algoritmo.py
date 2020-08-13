@@ -15,6 +15,7 @@ import pandas as pd
 import numpy as np
 import time
 from time import gmtime, strftime
+from datetime import timedelta, date
 import pyodbc
 import os
 import ftplib
@@ -33,6 +34,12 @@ def main():
     # leer el archivo a insertar
     df = pd.read_json("/home/jorge/Documents/Research/get_forecast_from_conagua/data/{}/DailyForecast_MX".format(today))
 
+    # Agregar fecha de pronóstico
+    df["fecha"] = pd.to_datetime(today)
+
+    # Agregar el día de la fecha
+    df["pronostico"] = df.apply(lambda x: agregar_dia(x["fecha"], x["ndia"]), axis=1)
+
     """
     # # # # # # # # # # # # # # # # # # #
     #              DATA TO SQL          #
@@ -47,47 +54,52 @@ def main():
         """
         Columns:
         cc,desciel,dh,dirvienc,dirvieng,dloc,ides,idmun,lat,lon,ndia,nes,
-            nmun,prec,probprec,raf,tmax,tmin,velvien
+            nmun,prec,probprec,raf,tmax,tmin,velvien, fecha, pronostico
         """
 
-        CC       = row["cc"]
-        DESCIEL  = row["desciel"]
-        DH       = row["dh"]
-        DIRVIENC = row["dirvienc"]
-        DIRVIENG = row["dirvieng"]
-        DLOC     = row["dloc"]
-        IDES     = row["ides"]
-        IDMUN    = row["idmun"]
-        LAT      = row["lat"]
-        LON      = row["lon"]
-        NDIA     = row["ndia"]
-        NES      = row["nes"]
-        NMUN     = row["nmun"]
-        PREC     = row["prec"]
-        PROBPREC = row["probprec"]
-        RAF      = row["raf"]
-        TMAX     = row["tmax"]
-        TMIN     = row["tmin"]
-        VELVIEN  = row["velvien"]
+        CC         = row["cc"]
+        DESCIEL    = row["desciel"]
+        DH         = row["dh"]
+        DIRVIENC   = row["dirvienc"]
+        DIRVIENG   = row["dirvieng"]
+        DLOC       = row["dloc"]
+        IDES       = row["ides"]
+        IDMUN      = row["idmun"]
+        LAT        = row["lat"]
+        LON        = row["lon"]
+        NDIA       = row["ndia"]
+        NES        = row["nes"]
+        NMUN       = row["nmun"]
+        PREC       = row["prec"]
+        PROBPREC   = row["probprec"]
+        RAF        = row["raf"]
+        TMAX       = row["tmax"]
+        TMIN       = row["tmin"]
+        VELVIEN    = row["velvien"]
+        FECHA      = row["fecha"]
+        PRONOSTICO = row["pronostico"]
 
         # generar query
         query = """INSERT INTO Pronostico (cc, desciel, dh, dirvienc, dirvieng,
                                         dloc, ides, idmun, lat, lon, ndia, nes,
                                         nmun, prec, probprec, raf, tmax, tmin,
-                                        velvien)
+                                        velvien, fecha, pronostico)
                                         VALUES ((?), (?), (?), (?), (?), (?),
                                         (?), (?), (?), (?), (?), (?), (?), (?),
-                                        (?), (?), (?), (?), (?))"""
+                                        (?), (?), (?), (?), (?), (?), (?))"""
 
         # ejecutar insert
         print(query)
         cursor.execute(query, (CC, DESCIEL, DH, DIRVIENC, DIRVIENG, DLOC, IDES,
                               IDMUN, LAT, LON, NDIA, NES, NMUN, PREC, PROBPREC,
-                              RAF, TMAX, TMIN, VELVIEN))
+                              RAF, TMAX, TMIN, VELVIEN, FECHA, PRONOSTICO))
         cursor.commit()
 
     conn.close()
     print("OK...")
+
+def agregar_dia(fecha_inicial, fecha_pronostico):
+    return fecha_inicial + timedelta(days=fecha_pronostico)
 
 if __name__ == '__main__':
     main()
