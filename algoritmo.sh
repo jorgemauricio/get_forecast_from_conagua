@@ -22,4 +22,4 @@ gunzip DailyForecast_MX.gz
 gunzip HourlyForecast_MX.gz
 
 # execute algoritmo.py
-/home/jorge/anaconda3/bin/python3.7 /home/jorge/Documents/Research/get_forecast_from_conagua/algoritmo.py
+/home/jorge/anaconda3/bin/python3.7 /home/jorge/Documents/Research/get_forecast_from_conagua/algoritmo_diario.py
